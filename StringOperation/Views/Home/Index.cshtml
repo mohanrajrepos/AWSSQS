@@ -1,0 +1,56 @@
+﻿
+@using StringOperation.Controllers
+@{
+    ViewData["Title"] = "Home Page";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="text-center">
+    <h1 class="display-4">String Operation</h1>
+    <input type="text" id="txtBoxInput" />
+    <div style="padding:10px">
+         
+        <button type="button" id="btnToUpper">ToUpper</button>
+        <button type="button" id="btnToLower">ToLower</button>
+    </div>
+    <div style="padding:10px">
+      
+        <h4>Results : </h4>
+        <label id="resultLabel"></label>
+    </div>
+    
+</div>
+<script>
+    $(document).ready(function(){
+        $("#btnToLower").click(function () {
+            var textBoxValue = $("#txtBoxInput").val();
+            
+
+            $.ajax({
+                url: '/Home/ToLower', 
+                type: 'POST',
+                data: { textBoxValue: textBoxValue },
+                success: function(response) {
+                    $("#resultLabel").text(response);
+
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                }
+            });
+        });
+        $("#btnToUpper").click(function () {
+            var textBoxValue = $("#txtBoxInput").val();
+            $.ajax({
+                url: '/Home/ToUpper', 
+                type: 'POST',
+                data: { textBoxValue: textBoxValue },
+                success: function(response) {
+                    $("#resultLabel").text(response);
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                }
+            });
+        });
+    });
+</script>
